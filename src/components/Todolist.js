@@ -3,50 +3,57 @@ import {toJS} from 'mobx'
 import {useEffect, useState} from "react";
 import store from "../store/store";
 import {useNavigate} from "react-router-dom";
+import {TodolistItem} from "./TodolistItem";
 
 export const Todolist = observer(() => {
 
-    const navigate = useNavigate()
-    const {todolist, app} = store
+  const navigate = useNavigate()
+  const {todolist, app} = store
 
-    const [newTodolist, setNewTodolist] = useState('')
+  const [newTodolist, setNewTodolist] = useState('')
 
-    useEffect(() => {
-        if (!app.isLogin) {
-            navigate('/login')
-        }
-    }, [app.isLogin])
+  useEffect(() => {
+    if (!app.isLogin) {
+      navigate('/login')
+    }
+  }, [app.isLogin])
 
-    useEffect(() => {
-        todolist.getTodolists()
-    }, [])
+  useEffect(() => {
+    todolist.getTodolists()
+  }, [])
 
-    if (app.isLoading) return <div>Loading</div>
+  if (app.isLoading) return <div>Loading...</div>
 
+  const renderNewTodolistPanel = () => {
     return (
-        <div>
-            <input type="text" value={newTodolist} onChange={e => {
-                setNewTodolist(e.target.value)
-            }}/>
-            <button onClick={() => {
-                todolist.addTodolist(newTodolist)
-                setNewTodolist('')
-            }}>add
-            </button>
-            <div>-------</div>
-            {todolist.todolists.map(({id, title}) => (
-                <div key={id}>
-                    <p>{title}</p>
-                    <button
-                    onClick={() => {
-                        todolist.removeTodolist(id)
-                    }}
-                    >X</button>
-                </div>
-            ))}
-            <div>-------</div>
-            <div>{todolist.taskCountGetter}</div>
-        </div>
-    );
+      <>
+        <input
+          type="text"
+          value={newTodolist}
+          onChange={e => {
+            setNewTodolist(e.target.value)
+          }}/>
+        <button
+          onClick={() => {
+            todolist.addTodolist(newTodolist)
+            setNewTodolist('')
+          }}>
+          add
+        </button>
+      </>
+    )
+  }
+
+  if (app.isLoading) return <div>Loading</div>
+
+  return (
+    <div>
+      {renderNewTodolistPanel()}
+      <div>-------</div>
+      {todolist.todolists.map(({id, title}) => <TodolistItem key={id} title={title} id={id}/>)}
+      <div>-------</div>
+      <div>{todolist.taskCountGetter}</div>
+    </div>
+  );
 })
 
