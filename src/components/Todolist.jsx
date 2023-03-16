@@ -52,7 +52,7 @@ export const Todolist = observer(() => {
       <div>-------</div>
       {todolist.todolists.map(({id, title}) => <TodolistItem key={id} title={title} id={id}/>)}
       <div>-------</div>
-      <div>{todolist.taskCountGetter}</div>
+      {/*<div>{todolist.taskCountGetter}</div>*/}
     </div>
   );
 })

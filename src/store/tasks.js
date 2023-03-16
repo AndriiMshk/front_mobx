@@ -28,7 +28,21 @@ class Todolist {
     app.setIsLoading(true)
     todoListsApi.postTask(todoListId, {title})
       .then((res) => {
-        this.tasks = {...this.tasks, [todoListId]: [...this.tasks[todoListId], res.data.data.item]}
+        this.setTasks(todoListId, [...this.tasks[todoListId], res.data.data.item])
+      })
+      .catch((err) => {
+        console.log(err.message)
+      })
+      .finally(() => {
+        app.setIsLoading(false)
+      })
+  }
+
+  removeTask(todolistId, taskId) {
+    app.setIsLoading(true)
+    todoListsApi.deleteTask(todolistId, taskId)
+      .then(() => {
+        this.setTasks(todolistId, this.tasks[todolistId].filter(el => el.id !== taskId))
       })
       .catch((err) => {
         console.log(err.message)

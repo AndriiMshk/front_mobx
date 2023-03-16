@@ -51,7 +51,14 @@ export const TodolistItem = observer(({id, title}) => {
         )
       }
       return (
-        tasks.tasks[id].map(({id, title}) => <TasksItem key={id} id={id} title={title}/>))
+        tasks.tasks[id].map(({id: taskId, title}) =>
+          <TasksItem
+            key={id}
+            taskId={taskId}
+            todolistId={id}
+            title={title}
+          />)
+      )
     }
 
     const renderNewTaskPanel = () => {
@@ -72,18 +79,17 @@ export const TodolistItem = observer(({id, title}) => {
       )
     }
 
+    const handleRemove = () => {
+      todolist.removeTodolist(id)
+    }
+
     if (app.isLoading || !tasks.tasks[id]) return <div>Loading...</div>
 
     return (
       <div>
         <div>
           {renderTitle()}
-          <button
-            onClick={() => {
-              todolist.removeTodolist(id)
-            }}
-          >X
-          </button>
+          <button onClick={handleRemove}>X</button>
         </div>
         =====
         {renderNewTaskPanel()}

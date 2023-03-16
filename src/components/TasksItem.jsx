@@ -1,8 +1,8 @@
 import {observer} from 'mobx-react-lite'
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import store from "../store/store";
 
-export const TasksItem = observer(({id, title}) => {
+export const TasksItem = observer(({todolistId, taskId, title}) => {
 
     const {tasks} = store
 
@@ -39,18 +39,15 @@ export const TasksItem = observer(({id, title}) => {
       )
     }
 
+    const handleRemoveTask = () => {
+      tasks.removeTask(todolistId, taskId)
+    }
 
     return (
       <div>
         <input type="checkbox"/>
         {renderTitle()}
-        <button
-          onClick={() => {
-            console.log('remove')
-            // tasks.removeTodolist(id)
-          }}
-        >X
-        </button>
+        <button onClick={handleRemoveTask}>X</button>
       </div>
     )
   }
