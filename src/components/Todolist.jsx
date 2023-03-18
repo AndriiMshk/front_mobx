@@ -1,5 +1,4 @@
 import {observer} from 'mobx-react-lite'
-import {toJS} from 'mobx'
 import {useEffect, useState} from "react";
 import store from "../store/store";
 import {useNavigate} from "react-router-dom";
