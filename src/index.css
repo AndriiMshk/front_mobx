@@ -4,5 +4,12 @@ body {
     margin: 0 auto;
     box-sizing: border-box;
     background-color: #4d5869;
-    color: white;
+    font-family: KacstArt, sans-serif;
+    font-size: 12px;
+}
+
+button {
+    margin-top: 10px;
+    box-shadow: 0 0 1px black;
+    border-radius: 5px;
 }

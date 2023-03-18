@@ -1,0 +1,32 @@
+@import '../../styles/mixins';
+
+.main {
+  @include container(20px);
+
+  form {
+    @include flex(space-around, column, center);
+    gap: 5px;
+
+    .label {
+      color: black;
+      font-size: 10px;
+    }
+
+    button {
+      width: 100%;
+    }
+  }
+}
+
+.help {
+  @include container(5px);
+  margin: 20px 0;
+
+  .title {
+    user-select: none;
+  }
+
+  p {
+    margin-left: 10px;
+  }
+}

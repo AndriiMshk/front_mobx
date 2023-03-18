@@ -1,9 +1,10 @@
 import {observer} from 'mobx-react-lite'
 import {Todolist} from "./components/Todolist";
-import {Login} from "./components/Login";
+import {Login} from "./components/login/Login";
 import store from "./store/store";
 import {useEffect} from "react";
 import {Route, Routes} from "react-router-dom";
+import style from './components/login/login.module.scss'
 
 
 export const App = observer(() => {
@@ -20,15 +21,13 @@ export const App = observer(() => {
 
   return (
     <>
-      <div>
-        {app.user.login}
-        {app.isLogin
-          ? <button onClick={handleExit}>exit</button>
-          : <>
-            <p>70688kv@ukr.net</p>
-            <p>123123123123</p>
-          </>}
-      </div>
+      {app.user.login}
+      {app.isLogin
+        ? <button onClick={handleExit}>exit</button>
+        : <div className={style.help}>
+          <p><span className={style.title}>Login: </span>70688kv@ukr.net</p>
+          <p><span className={style.title}>Password: </span>123123123123</p>
+        </div>}
       <Routes>
         <Route path={'/'} element={<Todolist/>}/>
         <Route path={'/login'} element={<Login/>}/>

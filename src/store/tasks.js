@@ -1,7 +1,6 @@
 import {makeAutoObservable} from 'mobx'
 import {todoListsApi} from "../api/api";
 import app from "./app";
-import {toJS} from 'mobx'
 
 
 class Tasks {
@@ -71,10 +70,6 @@ class Tasks {
     return Object.entries(this.tasks).map(el => ({id: el[0], amount: el[1].length}))
   }
 
-  //example convert mobx object to js
-  get toJsTasks() {
-    return toJS(this.tasks)
-  }
 }
 
 export default new Tasks()
