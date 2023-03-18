@@ -1,0 +1,43 @@
+@import '../../styles/mixins';
+
+.main {
+  @include container(20px);
+  @include flex(space-between, column, center);
+  gap: 10px;
+  width: 400px;
+
+  .title {
+    @include flex(space-between, row, center);
+    width: 100%;
+    gap: 5px;
+  }
+
+  .addPanel {
+    @include flex(space-between, row, end);
+    gap: 15px;
+    width: 100%;
+
+    .input {
+      width: 100%;
+
+      .label {
+        font-size: 10px;
+      }
+    }
+  }
+
+  .taskList {
+    @include flex(space-between, column, center);
+    gap: 5px;
+    width: 100%;
+  }
+
+  .taskAmount {
+    @include flex('', row, center);
+    padding-left: 30px;
+    gap: 15px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
+  }
+}

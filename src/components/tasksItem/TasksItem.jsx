@@ -1,6 +1,7 @@
 import {observer} from 'mobx-react-lite'
 import {useState} from "react";
-import store from "../store/store";
+import store from "../../store/store";
+import style from './taskItem.module.scss'
 
 
 export const TasksItem = observer(({todolistId, taskId, title, status}) => {
@@ -20,6 +21,7 @@ export const TasksItem = observer(({todolistId, taskId, title, status}) => {
       if (editMode) {
         return (
           <input
+            className={style.title}
             type="text"
             autoFocus
             onChange={e => {
@@ -30,12 +32,13 @@ export const TasksItem = observer(({todolistId, taskId, title, status}) => {
         )
       }
       return (
-        <span
+        <div
+          className={style.title}
           onDoubleClick={() => {
             setEditMode(true)
           }}>
           {title}
-        </span>
+        </div>
       )
     }
 
@@ -49,7 +52,7 @@ export const TasksItem = observer(({todolistId, taskId, title, status}) => {
     }
 
     return (
-      <div>
+      <div className={style.main}>
         <input
           checked={status === 1}
           type="checkbox"

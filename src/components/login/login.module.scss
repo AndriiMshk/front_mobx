@@ -8,7 +8,6 @@
     gap: 5px;
 
     .label {
-      color: black;
       font-size: 10px;
     }
 
@@ -29,4 +28,11 @@
   p {
     margin-left: 10px;
   }
+}
+
+.exit {
+  @include flex(space-between, row, center);
+  margin: 10px 0;
+  color: white;
+  font-size: 15px;
 }

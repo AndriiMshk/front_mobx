@@ -1,9 +1,10 @@
 import {observer} from 'mobx-react-lite'
 import {useEffect, useState} from "react";
-import store from "../store/store";
+import store from "../../store/store";
 import {useNavigate} from "react-router-dom";
-import {TodolistItem} from "./TodolistItem";
+import {TodolistItem} from "../todolistItem/TodolistItem";
 import {toJS} from 'mobx'
+import style from './todolist.module.scss'
 
 
 export const Todolist = observer(() => {
@@ -31,13 +32,16 @@ export const Todolist = observer(() => {
 
   const renderNewTodolistPanel = () => {
     return (
-      <>
-        <input
-          type="text"
-          value={newTodolist}
-          onChange={e => {
-            setNewTodolist(e.target.value)
-          }}/>
+      <div className={style.addPanel}>
+        <div>
+          <div>new todolist</div>
+          <input
+            type="text"
+            value={newTodolist}
+            onChange={e => {
+              setNewTodolist(e.target.value)
+            }}/>
+        </div>
         <button
           onClick={() => {
             todolist.addTodolist(newTodolist)
@@ -45,14 +49,14 @@ export const Todolist = observer(() => {
           }}>
           add
         </button>
-      </>
+      </div>
     )
   }
 
   if (app.isLoading) return <div>Loading</div>
 
   return (
-    <div>
+    <div className={style.main}>
       {renderNewTodolistPanel()}
       {todolist.todolists.map(({id, title}) =>
         <TodolistItem

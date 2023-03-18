@@ -1,5 +1,5 @@
 import {observer} from 'mobx-react-lite'
-import {Todolist} from "./components/Todolist";
+import {Todolist} from "./components/todolist/Todolist";
 import {Login} from "./components/login/Login";
 import store from "./store/store";
 import {useEffect} from "react";
@@ -21,9 +21,11 @@ export const App = observer(() => {
 
   return (
     <>
-      {app.user.login}
       {app.isLogin
-        ? <button onClick={handleExit}>exit</button>
+        ? <div className={style.exit}>
+          <div >{app.user.login}</div>
+          <button onClick={handleExit}>exit</button>
+        </div>
         : <div className={style.help}>
           <p><span className={style.title}>Login: </span>70688kv@ukr.net</p>
           <p><span className={style.title}>Password: </span>123123123123</p>
