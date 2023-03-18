@@ -11,10 +11,14 @@ export const TodolistItem = observer(({id, title}) => {
     const [editMode, setEditMode] = useState(false)
     const [newTitle, setNewTitle] = useState('')
     const [newTaskTitle, setNewTaskTitle] = useState('')
+    const [hasFetchedTasks, setHasFetchedTasks] = useState(false);
 
     useEffect(() => {
-      tasks.getTasks(id)
-    }, [])
+      if (!tasks.tasks[id] && !hasFetchedTasks) {
+        tasks.getTasks(id);
+        setHasFetchedTasks(true);
+      }
+    }, [id, tasks, hasFetchedTasks]);
 
     const renderTitle = () => {
 
