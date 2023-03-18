@@ -3,6 +3,7 @@
 .main {
   @include flex(space-around, column, center);
   gap: 8px;
+  margin-bottom: 50px;
 
   .addPanel {
     @include container(20px);

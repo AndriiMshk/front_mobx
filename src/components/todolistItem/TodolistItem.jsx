@@ -78,6 +78,13 @@ export const TodolistItem = observer(({id, title}) => {
       )
     }
 
+    const handleAddNewTask = () => {
+      if (newTaskTitle.length && newTaskTitle.length <= 15) {
+        tasks.addTask(id, newTaskTitle)
+      }
+      setNewTaskTitle('')
+    }
+
     const renderNewTaskPanel = () => {
       return (
         <div className={style.addPanel}>
@@ -90,10 +97,7 @@ export const TodolistItem = observer(({id, title}) => {
                 setNewTaskTitle(e.target.value)
               }}/>
           </div>
-          <button onClick={() => {
-            tasks.addTask(id, newTaskTitle)
-            setNewTaskTitle('')
-          }}>add
+          <button onClick={handleAddNewTask}>add
           </button>
         </div>
       )

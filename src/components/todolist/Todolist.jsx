@@ -28,7 +28,12 @@ export const Todolist = observer(() => {
     }
   }, [hasFetchedTodolists]);
 
-  if (app.isLoading) return <div>Loading...</div>
+  const handleAddNewTodolist = () => {
+    if (newTodolist.length && newTodolist.length <= 15) {
+      todolist.addTodolist(newTodolist)
+    }
+    setNewTodolist('')
+  }
 
   const renderNewTodolistPanel = () => {
     return (
@@ -42,18 +47,12 @@ export const Todolist = observer(() => {
               setNewTodolist(e.target.value)
             }}/>
         </div>
-        <button
-          onClick={() => {
-            todolist.addTodolist(newTodolist)
-            setNewTodolist('')
-          }}>
-          add
-        </button>
+        <button onClick={handleAddNewTodolist}>add</button>
       </div>
     )
   }
 
-  if (app.isLoading) return <div>Loading</div>
+  if (app.isLoading) return <div>Loading...</div>
 
   return (
     <div className={style.main}>

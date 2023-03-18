@@ -9,11 +9,16 @@ export const TasksItem = observer(({todolistId, taskId, title, status}) => {
     const {tasks} = store
 
     const [editMode, setEditMode] = useState(false)
-    const [newTitle, setNewTitle] = useState('')
+    const [newTitle, setNewTitle] = useState(title)
 
     const renderTitle = () => {
 
       const handleTitleChange = () => {
+        if (!newTitle.length || newTitle.length > 15) {
+          setEditMode(false)
+          setNewTitle(title)
+          return
+        }
         tasks.updateTask(todolistId, taskId, {title: newTitle, status})
         setEditMode(false)
       }
@@ -21,6 +26,7 @@ export const TasksItem = observer(({todolistId, taskId, title, status}) => {
       if (editMode) {
         return (
           <input
+            value={newTitle}
             className={style.title}
             type="text"
             autoFocus
