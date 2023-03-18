@@ -17,7 +17,7 @@ export const App = observer(() => {
 
   useEffect(() => app.getIsLogin, [])
 
-  if (app.isInitialized) return <div>loading</div>
+  if (app.isInitialized) return <div className={style.loading}>loading...</div>
 
   return (
     <>
