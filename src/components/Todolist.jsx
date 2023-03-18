@@ -49,10 +49,12 @@ export const Todolist = observer(() => {
   return (
     <div>
       {renderNewTodolistPanel()}
-      <div>-------</div>
-      {todolist.todolists.map(({id, title}) => <TodolistItem key={id} title={title} id={id}/>)}
-      <div>-------</div>
-      {/*<div>{todolist.taskCountGetter}</div>*/}
+      {todolist.todolists.map(({id, title}) =>
+        <TodolistItem
+          key={id}
+          title={title}
+          id={id}
+        />)}
     </div>
   );
 })

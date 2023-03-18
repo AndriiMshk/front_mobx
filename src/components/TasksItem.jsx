@@ -2,18 +2,18 @@ import {observer} from 'mobx-react-lite'
 import {useState} from "react";
 import store from "../store/store";
 
-export const TasksItem = observer(({todolistId, taskId, title}) => {
+
+export const TasksItem = observer(({todolistId, taskId, title, status}) => {
 
     const {tasks} = store
 
     const [editMode, setEditMode] = useState(false)
     const [newTitle, setNewTitle] = useState('')
 
-
     const renderTitle = () => {
 
       const handleTitleChange = () => {
-        // todolist.updateTodoList(id, newTitle)
+        tasks.updateTask(todolistId, taskId, {title: newTitle, status})
         setEditMode(false)
       }
 
@@ -39,13 +39,22 @@ export const TasksItem = observer(({todolistId, taskId, title}) => {
       )
     }
 
+    const handleChangeCheckbox = (e) => {
+      const status = e.target.checked ? 1 : 0
+      tasks.updateTask(todolistId, taskId, {status, title})
+    }
+
     const handleRemoveTask = () => {
       tasks.removeTask(todolistId, taskId)
     }
 
     return (
       <div>
-        <input type="checkbox"/>
+        <input
+          checked={status === 1}
+          type="checkbox"
+          onChange={handleChangeCheckbox}
+        />
         {renderTitle()}
         <button onClick={handleRemoveTask}>X</button>
       </div>

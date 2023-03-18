@@ -3,7 +3,7 @@ import {todoListsApi} from "../api/api";
 import app from "./app";
 
 
-class Todolist {
+class Tasks {
   tasks = {}
 
   constructor() {
@@ -52,6 +52,23 @@ class Todolist {
       })
   }
 
+  updateTask(todolistId, taskId, payload) {
+    app.setIsLoading(true)
+    todoListsApi.updateTask(todolistId, taskId, payload)
+      .then(() => {
+        this.setTasks(todolistId, this.tasks[todolistId].map(el => el.id === taskId ? {...el, ...payload} : el))
+      })
+      .catch((err) => {
+        console.log(err.message)
+      })
+      .finally(() => {
+        app.setIsLoading(false)
+      })
+  }
+
+  get taskCountGetter() {
+    return Object.entries(this.tasks).map(el => ({id: el[0], amount: el[1].length}))
+  }
 }
 
-export default new Todolist()
+export default new Tasks()

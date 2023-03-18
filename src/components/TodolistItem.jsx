@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import store from "../store/store";
 import {TasksItem} from "./TasksItem";
 
+
 export const TodolistItem = observer(({id, title}) => {
 
     const {todolist, tasks, app} = store
@@ -51,12 +52,13 @@ export const TodolistItem = observer(({id, title}) => {
         )
       }
       return (
-        tasks.tasks[id].map(({id: taskId, title}) =>
+        tasks.tasks[id].map(({id: taskId, title, status}) =>
           <TasksItem
-            key={id}
+            key={taskId}
             taskId={taskId}
             todolistId={id}
             title={title}
+            status={status}
           />)
       )
     }
@@ -91,10 +93,9 @@ export const TodolistItem = observer(({id, title}) => {
           {renderTitle()}
           <button onClick={handleRemove}>X</button>
         </div>
-        =====
         {renderNewTaskPanel()}
-        =====
         {renderTasks()}
+        <div>{tasks.taskCountGetter.find(el => el.id === id).amount}</div>
       </div>
     )
   }

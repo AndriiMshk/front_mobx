@@ -46,11 +46,3 @@ export const authApi = {
     return instance.delete('/auth/login');
   },
 };
-
-
-/*
-   deleteTask(todoListId: string, taskId: string) {
-
-    updateTask(todoListId: string, taskId: string, payload: UpdateTaskModelType)
-
-*/
